@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Session</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>✏️ Edit Session</h1>
+
+    <form method="POST" class="form">
+      <input name="subject" value="{{ session[1] }}" required>
+      <input name="duration" type="number" value="{{ session[2] }}" required>
+      <textarea name="notes">{{ session[3] }}</textarea>
+      <button type="submit">Update</button>
+    </form>
+
+    <p><a href="{{ url_for('index') }}">← Back to list</a></p>
+  </div>
+</body>
+</html>

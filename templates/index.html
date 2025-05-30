@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Study Session Logger</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>📘 Study Session Logger</h1>
+
+    <form action="/add" method="post" class="form">
+      <input name="subject" placeholder="Subject" required>
+      <input name="duration" type="number" placeholder="Duration (min)" required>
+      <textarea name="notes" placeholder="Notes"></textarea>
+      <button type="submit">Add Session</button>
+    </form>
+
+    <h2>📋 Session History</h2>
+    {% if sessions %}
+      <ul class="session-list">
+        {% for s in sessions %}
+          <li>
+            <div>
+              <strong>{{ s[1] }}</strong> - {{ s[2] }} mins<br>
+              <small>{{ s[3] }}</small>
+            </div>
+            <div>
+              <a href="{{ url_for('edit', session_id=s[0]) }}" class="edit-btn">✏️</a>
+              <a href="{{ url_for('delete', session_id=s[0]) }}" class="delete-btn">❌</a>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No sessions logged yet.</p>
+    {% endif %}
+  </div>
+</body>
+</html>
